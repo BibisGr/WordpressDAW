@@ -34,4 +34,25 @@ services:
     networks:
       - wpsite
 
-# confifuraciones de los servicios de phpmyadmin:
+# configuraciones de los servicios de phpmyadmin:
+  phpmyadmin:
+    depends_on:
+      - database
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    ports:
+        - "8080:80"
+    environment:
+        PMA_HOST: database
+        MYSQL_ROOT_PASSWORD: pass
+    networks:
+        - wpsite
+
+networks:
+    wpsite:
+
+volumes:
+    db_data:
+
+
+
